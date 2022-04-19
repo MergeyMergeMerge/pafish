@@ -23,6 +23,10 @@ The wiki page "[How to build](https://github.com/a0rtega/pafish/wiki/How-to-buil
 
 Alberto Ortega and many awesome [contributors](https://github.com/a0rtega/pafish/graphs/contributors).
 
+# This Fork
+
+This fork is for development of new additions based on "Spotless Sandboxes", an academic paper from Stony Brook University (https://www.ieee-security.org/TC/SP2017/papers/429.pdf). This doesn't intend to replicate the ML model used in that paper nor all of the features, but it does include a selection from the top 10 artifacts found in that paper.
+
 # License
 
 [GPL-3.0](LICENSE.txt)
