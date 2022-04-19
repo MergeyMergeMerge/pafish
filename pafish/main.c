@@ -22,6 +22,7 @@
 #include "cpu.h"
 #include "bochs.h"
 #include "rtt.h"
+#include "spotlesssand.h"
 /*
    Pafish (Paranoid fish)
 
@@ -356,6 +357,13 @@ int main(void)
 		   &bochs_cpu_intel1,
 		   "Bochs traced using CPU Intel wrong value for processor name",
 		   "hi_bochs");
+
+	/* Spotless Sandboxes Artifact checking */
+	exec_check("suspicious device cls count", &spotlesssand_clscount, "Device cls count suspiciously low", "hi_spotlesssand");
+	exec_check("suspicious total process count", &spotlesssand_totalproc, "Device process count suspiciously low", "hi_spotlesssand");
+	exec_check("suspicious device unique url count", &spotlesssand_uniqueurl, "Device unique url count suspiciously low", "hi_spotlesssand");
+	exec_check("suspicious device dns cache count", &spotlesssand_dnscache, "Device dns cache count suspiciously low", "hi_spotlesssand");
+	exec_check("suspicious device cookiw count", &spotlesssand_clscount, "Device cookiw count suspiciously low", "hi_spotlesssand");
 
 #if __i386__
 	/* Cuckoo detection tricks */
