@@ -1,11 +1,11 @@
 
-CC        = gcc.exe
-LINK      = gcc.exe
-WINDRES   = windres.exe
+CC        = i686-w64-mingw32-gcc
+LINK      = i686-w64-mingw32-gcc
+WINDRES   = i686-w64-mingw32-windres
 OBJ       = Objects/MingW/main.o Objects/MingW/common.o Objects/MingW/utils.o Objects/MingW/debuggers.o Objects/MingW/sandboxie.o \
 	    Objects/MingW/vbox.o Objects/MingW/gensandbox.o Objects/MingW/wine.o Objects/MingW/vmware.o \
 	    Objects/MingW/qemu.o Objects/MingW/hooks.o Objects/MingW/cpu.o Objects/MingW/cuckoo.o Objects/MingW/bochs.o \
-	    Objects/MingW/rtt.o Objects/MingW/pafish_private.res
+	    Objects/MingW/rtt.o Objects/MingW/spotlesssand.o Objects/MingW/pafish_private.res
 LINKOBJ   = $(OBJ)
 LIBS      = -lwsock32 -liphlpapi -lsetupapi -lmpr -lole32 -lwbemuuid -loleaut32 -lws2_32 -s
 INCS      =
@@ -15,9 +15,9 @@ CFLAGS    = $(INCS) -Wall -Wextra -Wpedantic -O0
 all: $(BIN)
 
 clean:
-	del /Q Objects\MingW\*.o
-	del /Q Objects\MingW\*.res
-	del /Q Output\MingW\*.exe
+	rm -f Objects/MingW/*.o
+	rm -f Objects/MingW/*.res
+	rm -f Output/MingW/*.exe
 
 $(BIN): $(OBJ)
 	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS)
@@ -66,6 +66,9 @@ Objects/MingW/bochs.o: $(GLOBALDEPS) bochs.c
 
 Objects/MingW/rtt.o: $(GLOBALDEPS) rtt.c
 	$(CC) -c rtt.c -o Objects/MingW/rtt.o $(CFLAGS)
+
+Objects/MingW/spotlesssand.o: $(GLOBALDEPS) spotlesssand.c
+	$(CC) -c spotlesssand.c -o Objects/MingW/spotlesssand.o $(CLFLAGS)
 
 Objects/MingW/pafish_private.res: Objects/MingW/pafish_private.rc
 	$(WINDRES) Objects/MingW/pafish_private.rc --input-format=rc -o Objects/MingW/pafish_private.res -O coff
