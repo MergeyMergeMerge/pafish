@@ -5,10 +5,10 @@ int spotlesssand_clscount();
 
 int spotlesssand_totalproc();
 
-int spotlesssand_uniqueurl();
+int spotlesssand_browsernum();
 
-int spotlesssand_dnscache();
+int spotlesssand_syssrc();
 
-int spotlesssand_totalcookies();
+int spotlesssand_autorun();
 
 #endif

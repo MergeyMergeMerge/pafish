@@ -360,11 +360,11 @@ int main(void)
 
 	/* Spotless Sandboxes Artifact checking */
 	print_check_group("Spotless Sandboxes Artifact checking");
-	exec_check("suspicious device cls count", &spotlesssand_clscount, "Device cls count suspiciously low", "hi_spotlesssand");
-	exec_check("suspicious total process count", &spotlesssand_totalproc, "Device process count suspiciously low", "hi_spotlesssand");
-	exec_check("suspicious device unique url count", &spotlesssand_uniqueurl, "Device unique url count suspiciously low", "hi_spotlesssand");
-	exec_check("suspicious device dns cache count", &spotlesssand_dnscache, "Device dns cache count suspiciously low", "hi_spotlesssand");
-	exec_check("suspicious device cookie count", &spotlesssand_totalcookies, "Device cookie count suspiciously low", "hi_spotlesssand");
+	exec_check("Previous USB Devices Connected", &spotlesssand_clscount, "Suspiciously low number of previously connected USB Devices", "hi_spotlesssand");
+	exec_check("Process Count", &spotlesssand_totalproc, "Device process count suspiciously low", "hi_spotlesssand");
+	exec_check("Number of Installed Browsers", &spotlesssand_browsernum, "Browser count suspiciously low", "hi_spotlesssand");
+	exec_check("System event log Source count", &spotlesssand_syssrc, "Ssytem event log source count suspiciously low", "hi_spotlesssand");
+	exec_check("Autorun programs", &spotlesssand_autorun, "Autorun count suspiciously low", "hi_spotlesssand");
 
 #if __i386__
 	/* Cuckoo detection tricks */
