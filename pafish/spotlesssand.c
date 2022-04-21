@@ -35,8 +35,8 @@ int spotlesssand_clscount(){
 			}
 		}
 	}
-	printf("%i subkeys\n", count);
-	return count < 60;
+	printf("%i subkeys... ", count);
+	return count < 15;
 }
 
 int spotlesssand_totalproc(){
@@ -45,31 +45,53 @@ int spotlesssand_totalproc(){
 	BOOL ret;
 	ret = EnumProcesses(buf, 4096, &numBytes);
 	int numProc = numBytes / sizeof(DWORD);
-	printf("%i processes\n", numProc);
+	printf("%i processes... ", numProc);
 	return numProc < 41;
 }
 
+BOOL DirectoryExists(LPCSTR path){
+	DWORD dwAttrib = GetFileAttributes(path);
+	return (dwAttrib != INVALID_FILE_ATTRIBUTES && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+}
+
 int spotlesssand_browsernum(){
-	int count = 0;
-	if (pafish_exists_regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Google\\Chrome")) {
+	int count = 1; //assume either Edge or IE is already there and don't check for them
+	if (DirectoryExists("C:\\Program Files\\Google\\Chrome")) {
 			count++;
 	}
-	if (pafish_exists_regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Edge")) {
+	if (DirectoryExists("C:\\Program Files\\Mozilla Firefox")) {
 			count++;
 	}
-	if (pafish_exists_regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Mozilla\\Firefox")) {
-			count++;
-	}
+	printf("%i Browsers... ", count);
 	return count <= 1;
 }
 
-int spotlesssand_syssrc(){
-	DWORD ret = ERROR_SUCCESS;
-	LPWSTR channelName = L"SYSTEM";
-	LPWSTR query = L"*";
-	//EVT_HANDLE results = EvtQuery(NULL, channelName, query, EvtQueryChannelPath | EvtQueryReverseDirection);
-	return 0;
-}
+int spotlesssand_usbstorcount(){
+	HKEY regkey;
+	LONG ret;
+	int count = 0;
+	FILETIME ftLastWriteTime;
+	if (pafish_iswow64()){
+		ret = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Enum\\USBSTOR", 0, KEY_READ | KEY_WOW64_64KEY, &regkey);
+	} else {
+
+		ret = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Enum\\USBSTOR", 0, KEY_READ, &regkey);
+	}
+	if (ret == ERROR_SUCCESS){
+		for (int i = 0; i < 200; i++){
+			DWORD subkeyLength = 255;
+			TCHAR subkeyName[255];
+			ret = RegEnumKeyExA(regkey, i, subkeyName, &subkeyLength, NULL, NULL, NULL, &ftLastWriteTime);
+			if (ret == 259){
+				count = i;
+				break;
+			}
+		}
+	}
+	printf("%i subkeys... ", count);
+	return count < 2;
+
+	}
 
 int spotlesssand_autorun(){
 	HKEY regkey;
@@ -114,6 +136,6 @@ int spotlesssand_autorun(){
 			}
 		}
 	}
-	printf("%i autorun apps!", count);
+	printf("%i autorun apps... ", count);
 	return count < 2;
 }

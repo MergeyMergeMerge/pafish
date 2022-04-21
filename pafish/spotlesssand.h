@@ -7,8 +7,10 @@ int spotlesssand_totalproc();
 
 int spotlesssand_browsernum();
 
-int spotlesssand_syssrc();
+int spotlesssand_usbstorcount();
 
 int spotlesssand_autorun();
+
+BOOL DirectoryExists(LPCSTR path);
 
 #endif

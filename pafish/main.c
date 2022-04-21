@@ -363,7 +363,7 @@ int main(void)
 	exec_check("Previous USB Devices Connected", &spotlesssand_clscount, "Suspiciously low number of previously connected USB Devices", "hi_spotlesssand");
 	exec_check("Process Count", &spotlesssand_totalproc, "Device process count suspiciously low", "hi_spotlesssand");
 	exec_check("Number of Installed Browsers", &spotlesssand_browsernum, "Browser count suspiciously low", "hi_spotlesssand");
-	exec_check("System event log Source count", &spotlesssand_syssrc, "Ssytem event log source count suspiciously low", "hi_spotlesssand");
+	exec_check("Previous USB Storage Devices Connected", &spotlesssand_usbstorcount, "USB Storage device count suspiciously low", "hi_spotlesssand");
 	exec_check("Autorun programs", &spotlesssand_autorun, "Autorun count suspiciously low", "hi_spotlesssand");
 
 #if __i386__
